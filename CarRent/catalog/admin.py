@@ -13,4 +13,13 @@ admin.site.register(Client)
 @admin.register(CarInstance)
 class CarInstanceAdmin(admin.ModelAdmin):
     list_display = ["car", "status", "date_start", "date_back", "client"]
-    list_filter = ["status", "date_back", "client"]
+    list_filter = ["car","status"]
+
+    fieldsets = (
+        ('Автомобиль и клиент', {
+            'fields': ('car', 'client')
+        }),
+        ('Статус и сроки аренды', {
+            'fields' : ('status', 'date_start', 'date_back')
+        })
+    )
