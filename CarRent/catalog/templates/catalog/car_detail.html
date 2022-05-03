@@ -1,0 +1,24 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+    <h1>Название автомобиля: {{ car.title }}</h1>
+    <div style="margin-left: 20px;margin-top: 20px">
+        <p><strong>Рег.номер: {{ car.reg_number }}</strong></p>
+        <p><strong>Номер в автопарке: {{ car.num }}</strong></p>
+        <p><strong>Категория: {{ car.category }}</strong></p>
+        <p><strong>Состояние: {{ car.condition }}</strong></p>
+    </div>
+
+    <h4>Подробная информация о статусе автомобили в автопарке:</h4>
+    <div style="margin-left: 20px;margin-top: 20px">
+        {% for copy in car.carinstance_set.all %}
+            <hr><p class="{% if copy.status == 1 %} text-success
+                            {% elif copy.status == 2 %} text-danger
+                            {% else %} text-warning
+                            {% endif %}">
+            {{ copy.get_status_display }}</p>
+            <p><strong>Cтaтyc автомобиля:</strong> {{copy.status}}</p>
+        {% endfor %}
+    </div>
+{% endblock %}

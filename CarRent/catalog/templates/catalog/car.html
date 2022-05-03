@@ -1,0 +1,15 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+    <h1>Название автомобиля: {{ car.title }}</h1>
+
+    <p><strong>Рег.номер: {{ car.reg_number }}</strong></p>
+    <p><strong>Номер в автопарке: {{ car.num }}</strong></p>
+    <p><strong>Категория: {{ car.category }}</strong></p>
+    <p><strong>Состояние: {{ car.condition }}</strong></p>
+
+{% if car.photo %}
+<p><img class="img-article-left" src="{{car.photo.url}}"></p>
+{% endif %}
+
+{% endblock %}

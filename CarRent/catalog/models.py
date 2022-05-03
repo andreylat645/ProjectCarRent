@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.urls import reverse
 
@@ -13,15 +15,18 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+
 class Client(models.Model):
     first_name = models.CharField(max_length=30,
-                            help_text="Введите имя клиента",
-                            verbose_name="Имя клиента")
+                                  help_text="Введите имя клиента",
+                                  verbose_name="Имя клиента")
     last_name = models.CharField(max_length=30,
-                            help_text="Введите фамилию клиента",
-                            verbose_name="Фамилия клиента")
+                                 help_text="Введите фамилию клиента",
+                                 verbose_name="Фамилия клиента")
+
     def __str__(self):
         return '%s %s' % (self.first_name, self.last_name)
+
 
 class Condition(models.Model):
     name = models.CharField(max_length=50,
@@ -48,6 +53,11 @@ class Car(models.Model):
     title = models.CharField(max_length=50,
                              help_text="Введите марку автомобиля",
                              verbose_name="Марка автомобиля")
+    slug = models.SlugField(max_length=255,
+                            unique=True,
+                            db_index=True,
+                            verbose_name="URL",
+                            default=uuid.uuid1)
     model = models.CharField(max_length=50,
                              help_text="Введите модель автомобиля",
                              verbose_name="Модель автомобиля")
@@ -69,11 +79,15 @@ class Car(models.Model):
                                   on_delete=models.CASCADE,
                                   help_text="Выберите состояние автомобиля",
                                   verbose_name="Состояние автомобиля")
-    class Meta:
-        ordering = ["num"]
+
+    def get_absolute_url(self):
+        return reverse('car', kwargs={'car_slug': self.slug})
 
     def __str__(self):
         return '%s %s %s' % (self.num, self.title, self.model)
+
+    class Meta:
+        ordering = ["num"]
 
 
 class Status(models.Model):
@@ -107,6 +121,7 @@ class CarInstance(models.Model):
                                null=True,
                                help_text="Выберите клиента",
                                verbose_name="Клиент")
+
     class Meta:
         ordering = ["date_back"]
 
