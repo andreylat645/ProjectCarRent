@@ -1,3 +1,4 @@
 Django==3.0.7
 psycopg2-binary==2.8.5
 djangorestframework==3.10.2
+django-crispy-forms

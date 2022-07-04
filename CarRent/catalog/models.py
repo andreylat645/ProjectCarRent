@@ -2,8 +2,14 @@ import uuid
 
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
+from datetime import date
 
-
+@property
+def is_overdue(self):
+    if self.due_back and date.today() > self.due_back:
+        return True
+    return False
 class Category(models.Model):
     name = models.CharField(max_length=200,
                             help_text="Введите категорию автомобиля",
@@ -121,6 +127,10 @@ class CarInstance(models.Model):
                                null=True,
                                help_text="Выберите клиента",
                                verbose_name="Клиент")
+    borrower = models.ForeignKey(User, on_delete=models.SET_NULL,
+                                 null=True, blank=True,
+                                 verbose_name="Заказчик",
+                                 help_text="Выберите клиента заказа")
 
     class Meta:
         ordering = ["date_back"]
