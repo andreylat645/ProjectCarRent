@@ -5,7 +5,6 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from datetime import date
 
-
 @property
 def is_overdue(self):
     if self.due_back and date.today() > self.due_back:

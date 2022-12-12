@@ -20,6 +20,6 @@ class CarInstanceAdmin(admin.ModelAdmin):
             'fields': ('car', 'client')
         }),
         ('Статус и сроки аренды', {
-            'fields' : ('status', 'date_start', 'date_back', '"borrower",')
+            'fields' : ('status', 'date_start', 'date_back', 'borrower')
         })
     )
