@@ -137,5 +137,11 @@ class CarInstance(models.Model):
     class Meta:
         ordering = ["date_back"]
 
+    @property
+    def is_overdue(self):
+        if self.date_back and date.today() > self.date_back:
+            return True
+        return False
+
     def __str__(self):
         return '%s %s' % (self.car, self.status)

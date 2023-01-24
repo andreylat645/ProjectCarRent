@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import Car, Condition, Category, CarInstance, Status, Country, Client
 from django.http import HttpResponse
 from django.views import generic
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def index(request):
     num_car = Car.objects.all().count()
@@ -32,3 +32,15 @@ class CarDetailView(generic.DetailView):
     slug_url_kwarg = 'car_slug'
     context_object_name = 'car'
 
+class LoanedCarsByUserListView(LoginRequiredMixin, generic.ListView):
+    '''
+    Класс для прелставления списка автомобилей,
+    которые находятся в аренде у текущего пользователя.
+    '''
+
+    model = CarInstance
+    template_name = 'catalog/carinstance_list_borrowed_user.html'
+    paginate_by = 10
+
+    def ger_queryset(self):
+        return CarInstance.objects.filter(borrower=self.request.user).filter(status__exact='2').order_by('due_back')

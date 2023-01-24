@@ -5,4 +5,5 @@ urlpatterns = [
     path('', index, name='home'),
     path('cars/', CarListView.as_view(), name='cars'),
     path('car/<slug:car_slug>/', CarDetailView.as_view(), name='car'),
+    path('mycars/', LoanedCarsByUserListView.as_view(), name='my-borrowed'),
 ]

@@ -1,0 +1,24 @@
+ {% extends "base_generic.html" %}
+
+ {% block content %}
+    <h1>Аренда автомобиля</h1>
+    {% if carinstance_list %}
+    <ul>
+
+        {% for carinst in carinstance_list %}
+        <li class="{% if carinst.is_overdue %}"
+            text-danger{% endif %}>
+
+            <a href="{% url 'car_detail' carinst.car.pk %}">
+            {{carinst.book.title}}</a>
+
+            ({{ carinst.date_back}})
+
+        </li>
+        {% endfor %}
+    </ul>
+
+    {% else %}
+        <p> Нет авто со статусом "Арендован" </p>
+    {% endif %}
+ {% endblock %}
