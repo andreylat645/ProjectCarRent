@@ -59,6 +59,7 @@ class Country(models.Model):
 
 class Car(models.Model):
     title = models.CharField(max_length=50,
+                             null=True,
                              help_text="Введите марку автомобиля",
                              verbose_name="Марка автомобиля")
     slug = models.SlugField(max_length=255,
@@ -67,6 +68,7 @@ class Car(models.Model):
                             verbose_name="URL",
                             default=uuid.uuid1)
     model = models.CharField(max_length=50,
+                             null=True,
                              help_text="Введите модель автомобиля",
                              verbose_name="Модель автомобиля")
     num = models.CharField(max_length=20, null=True,
@@ -77,14 +79,17 @@ class Car(models.Model):
                                   verbose_name="Рег.номер автомобиля")
     category = models.ForeignKey('Category',
                                  on_delete=models.CASCADE,
+                                 null=True,
                                  help_text="Выберите категорию автомобиля",
                                  verbose_name="Категория автомобиля")
     country = models.ForeignKey('Country',
                                 on_delete=models.CASCADE,
+                                null=True,
                                 help_text="Выберите страну производства",
                                 verbose_name="Страна производства")
     condition = models.ForeignKey('Condition',
                                   on_delete=models.CASCADE,
+                                  null=True,
                                   help_text="Выберите состояние автомобиля",
                                   verbose_name="Состояние автомобиля")
 

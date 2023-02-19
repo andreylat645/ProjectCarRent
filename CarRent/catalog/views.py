@@ -52,3 +52,23 @@ def cars_add(request):
     carsForm = CarsForm()
     return render(request, "catalog/cars_add.html",
                   {"form": carsForm, "car": car})
+
+#Добавление автомобиля в бд
+def create_car(request):
+    if request.method == "POST":
+        car = Car()
+        car.title = request.POST.get("title")
+        car.model = request.POST.get("model")
+        car.reg_number = request.POST.get("reg_number")
+        car.save()
+        # Возвразаемся на предыдущую страницу
+        return HttpResponseRedirect("/cars_add/")
+
+#Удаление автомобиля
+def delete_car(request, id):
+    try:
+        car = Car.objects.get(id=id)
+        car.delete()
+        return HttpResponseRedirect("/cars_add/")
+    except:
+        return HttpResponseNotFound("<h2> Автомобиль не найден</h2>")
