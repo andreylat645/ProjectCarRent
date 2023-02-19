@@ -1,22 +1,23 @@
- {% extends "base_generic.html" %}
+{% extends "base_generic.html" %}
 
- {% block content %}
+{% block content %}
+
     <h1>Аренда автомобиля</h1>
-    {% if carinstance_list %}
-    <ul>
-        {% for carinst in carinstance_list %}
-        <li class="{% if carinst.is_overdue %} text-danger{% endif %}">
+    <div style="margin-right: 100px;margin-top: 20px">
+        {% if carinstance_list %}
+        <ul>
+            {% for carinst in carinstance_list %}
+            <li class="{% if carinst.is_overdue %} text-danger{% endif %}">
 
-            <a href="{% url 'car' carinst.car.pk %}">
+<!--            <a href="{% url 'car' carinst.car.pk %}"></a>-->
                 {{ carinst.car.title }}
-            </a>
-
-            ({{ carinst.date_back }})
-        </li>
-        {% endfor %}
-    </ul>
+                (Дата окончания аренды: {{ carinst.date_back }})
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 
     {% else %}
         <p> Нет авто со статусом "Арендован" </p>
     {% endif %}
- {% endblock %}
+{% endblock %}

@@ -1,8 +1,10 @@
 from django.shortcuts import render
+from django.http import *
 from .models import Car, Condition, Category, CarInstance, Status, Country, Client
 from django.http import HttpResponse
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import CarsForm
 
 def index(request):
     num_car = Car.objects.all().count()
@@ -44,3 +46,9 @@ class LoanedCarsByUserListView(LoginRequiredMixin, generic.ListView):
 
     def ger_queryset(self):
         return CarInstance.objects.filter(borrower=self.request.user).filter(status__exact='2').order_by('due_back')
+
+def cars_add(request):
+    car = Car.objects.all()
+    carsForm = CarsForm()
+    return render(request, "catalog/cars_add.html",
+                  {"form": carsForm, "car": car})
