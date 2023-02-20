@@ -1,0 +1,23 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h3> Список существующих автомобилей</h3>
+    <h4>{{car.title}} {{car.model}}</h4>
+
+    <form method="POST">
+        {% csrf_token %}
+        <p>
+            <label>Изменить марку автомобиля</label><br>
+            <input type="text" name="title" value="{{car.title}}" />
+        </p>
+        <p>
+            <label>Изменить модель автомобиля</label><br>
+            <input type="text" name="model" value="{{car.model}}" />
+        </p>
+        <p>
+            <label>Изменить рег.номер автомобиля</label><br>
+            <input type="text" name="reg_number" value="{{car.reg_number}}" />
+        </p>
+        <input type="submit" value="Сохранить изменения">
+    </form>
+{% endblock %}

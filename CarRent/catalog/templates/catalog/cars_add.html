@@ -13,6 +13,9 @@
             <th>
                 Модель
             </th>
+            <th>
+                Рег.номер
+            </th>
         </thead>
 
         {% if car %}
@@ -21,7 +24,8 @@
                     <td>{{car.id}}</td>
                     <td>{{car.title}}</td>
                     <td>{{car.model}}</td>
-                    <td><a href="/edit1/{{car.id}}">Изменить</a>,
+                    <td>{{car.reg_number}}</td>
+                    <td><a href="/edit_car/{{car.id}}">Изменить</a>,
                         <a href="/delete_car/{{car.id}}">Удалить</a></td>
                 </tr>
             {% endfor %}

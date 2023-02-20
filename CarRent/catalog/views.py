@@ -72,3 +72,15 @@ def delete_car(request, id):
         return HttpResponseRedirect("/cars_add/")
     except:
         return HttpResponseNotFound("<h2> Автомобиль не найден</h2>")
+
+#Изменение данных автомобиля
+def edit_car(request, id):
+    car = Car.objects.get(id=id)
+    if request.method == "POST":
+        car.title = request.POST.get("title")
+        car.model = request.POST.get("model")
+        car.reg_number = request.POST.get("reg_number")
+        car.save()
+        return HttpResponseRedirect("/cars_add/")
+    else:
+        return render(request, "catalog/edit_car.html", {"car": car})
