@@ -28,6 +28,7 @@
             {% if user.is_authenticated %}
                 {% if user.is_superuser %}
                     <li><a href="{% url 'cars_add' %}">Редактирование автомобилей</a></li>
+                    <li><a href="{% url 'car_instance_create' %}">Создать заказ для аренды автомобиля</a></li>
                     <li>Пользователь: {{ user.get_username }}</li>
                     <li><a href="{% url 'logout' %}?next={{ request.path }}">Выйти</a> </li>
                 {% else %}

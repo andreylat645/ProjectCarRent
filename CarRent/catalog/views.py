@@ -5,6 +5,8 @@ from django.http import HttpResponse
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import CarsForm
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 
 def index(request):
     num_car = Car.objects.all().count()
@@ -84,3 +86,17 @@ def edit_car(request, id):
         return HttpResponseRedirect("/cars_add/")
     else:
         return render(request, "catalog/edit_car.html", {"car": car})
+
+class CarInstanceCreate(CreateView):
+    model = CarInstance
+    fields = "__all__"
+    success_url = reverse_lazy('cars')
+
+class CarInstanceUpdate(UpdateView):
+        model = CarInstance
+        fields = "__all__"
+        success_url = reverse_lazy('cars')
+
+class CarInstanceDelete(DeleteView):
+    model = CarInstance
+    success_url = reverse_lazy('cars')
