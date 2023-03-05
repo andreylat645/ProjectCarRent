@@ -120,6 +120,11 @@ class CarInstance(models.Model):
                             on_delete=models.CASCADE,
                             null=True,
                             verbose_name="Автомобиль")
+    slug = models.SlugField(max_length=255,
+                            unique=True,
+                            db_index=True,
+                            verbose_name="URL",
+                            default=uuid.uuid1)
     status = models.ForeignKey('Status', on_delete=models.CASCADE,
                                null=False,
                                help_text="Изменить статус автомобиля",

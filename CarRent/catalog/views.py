@@ -90,13 +90,18 @@ def edit_car(request, id):
 class CarInstanceCreate(CreateView):
     model = CarInstance
     fields = "__all__"
-    success_url = reverse_lazy('cars')
+    exclude = ['slug']
+    success_url = reverse_lazy('car_instances')
 
 class CarInstanceUpdate(UpdateView):
         model = CarInstance
         fields = "__all__"
-        success_url = reverse_lazy('cars')
+        success_url = reverse_lazy('car_instances')
 
 class CarInstanceDelete(DeleteView):
     model = CarInstance
-    success_url = reverse_lazy('cars')
+    success_url = reverse_lazy('car_instances')
+
+class CarInstanceListView(generic.ListView):
+    model = CarInstance
+    paginate_by = 3

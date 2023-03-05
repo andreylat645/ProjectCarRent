@@ -1,0 +1,22 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <div class="carinstance_list">
+        <h1>Список заказов в БД</h1>
+            {% if carinstance_list %}
+        <ul>
+            {% for car_instance in carinstance_list %}
+            <li>
+<!--                <a href="{{ car_instance.get_absolute_url }}">-->
+                {{ car_instance.id }} {{ car_instance.client }}
+<!--                </a>-->
+                <a href="/carinstances/update/{{car_instance.slug}}">Изменить</a>
+                <a href="/carinstances/delete/{{car_instance.slug}}">Удалить</a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <p>В базе нет заказов</p>
+        {% endif %}
+    </div>
+{% endblock %}
