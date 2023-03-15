@@ -1,0 +1,53 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h3> Список существующих заказов</h3>
+    <table>
+        <thead>
+            <th>
+                Id
+            </th>
+            <th>
+                Автомобиль
+            </th>
+            <th>
+                Статус
+            </th>
+            <th>
+                Дата нач.аренды
+            </th>
+            <th>
+                Дата завер.аренды
+            </th>
+            <th>
+                Клиент
+            </th>
+        </thead>
+
+        {% if car %}
+            {% for carinstance in carinstance.all %}
+                <tr>
+                    <td>{{carinstance.id}}</td>
+                    <td>{{carinstance.car}}</td>
+                    <td>{{carinstance.status}}</td>
+                    <td>{{carinstance.date_start}}</td>
+                     <td>{{carinstance.date_back}}</td>
+                     <td>{{carinstance.client}}</td>
+<!--                    <td><a href="/edit_car/{{car.id}}">Изменить</a>,-->
+<!--                        <a href="/delete_car/{{car.id}}">Удалить</a></td>-->
+                </tr>
+            {% endfor %}
+        {% else %}}
+            <p>В базе данных нет существующих заказов</p>
+        {% endif %}
+    </table>
+
+    <h3>Добавить новый заказ</h3>
+    <form method="POST" action="/create_car/">
+        {% csrf_token %}
+        <table>
+            {{ form }}
+        </table>
+        <input type="submit" value="Сохранить">
+    </form>
+{% endblock %}

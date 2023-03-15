@@ -7,7 +7,14 @@ class CarsForm(forms.Form):
     model = forms.CharField(label="Модель автомобиля")
     reg_number = forms.CharField(label="Регистрационный номер")
 
-class CarInstanceModelForm(forms.Form):
-    class Meta:
-        model = CarInstance
-        fields = ['car', 'status', 'date_start', 'date_back', 'client']
+class InstancesForm(forms.Form):
+    car = forms.CharField(label="Автомобиль")
+    status = forms.CharField(label="Статус")
+    date_start = forms.CharField(label="Дата нач.аренды")
+    date_back = forms.CharField(label="Дата завер.аренды")
+    client = forms.CharField(label="Клиент")
+
+# class CarInstanceModelForm(forms.Form):
+#     class Meta:
+#         model = CarInstance
+#         fields = ['car', 'status', 'date_start', 'date_back', 'client']

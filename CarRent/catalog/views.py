@@ -4,7 +4,7 @@ from .models import Car, Condition, Category, CarInstance, Status, Country, Clie
 from django.http import HttpResponse
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import CarsForm
+from .forms import CarsForm, InstancesForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
@@ -87,21 +87,31 @@ def edit_car(request, id):
     else:
         return render(request, "catalog/edit_car.html", {"car": car})
 
-class CarInstanceCreate(CreateView):
-    model = CarInstance
-    fields = "__all__"
-    exclude = ['slug']
-    success_url = reverse_lazy('car_instances')
 
-class CarInstanceUpdate(UpdateView):
-        model = CarInstance
-        fields = "__all__"
-        success_url = reverse_lazy('car_instances')
+# Релализация отображения заказов в виде формы
 
-class CarInstanceDelete(DeleteView):
-    model = CarInstance
-    success_url = reverse_lazy('car_instances')
+def instances_add(request):
+    carInstance = CarInstance.objects.all()
+    instancesForm = InstancesForm()
+    return render(request, "catalog/instances_add.html",
+                  {"form": instancesForm, "carinstance": carInstance})
 
-class CarInstanceListView(generic.ListView):
-    model = CarInstance
-    paginate_by = 3
+# Отображение в виде запроса
+# class CarInstanceCreate(CreateView):
+#     model = CarInstance
+#     fields = "__all__"
+#     exclude = ['slug']
+#     success_url = reverse_lazy('car_instances')
+#
+# class CarInstanceUpdate(UpdateView):
+#         model = CarInstance
+#         fields = "__all__"
+#         success_url = reverse_lazy('car_instances')
+#
+# class CarInstanceDelete(DeleteView):
+#     model = CarInstance
+#     success_url = reverse_lazy('car_instances')
+#
+# class CarInstanceListView(generic.ListView):
+#     model = CarInstance
+#     paginate_by = 3
