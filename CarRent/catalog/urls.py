@@ -10,7 +10,8 @@ urlpatterns = [
     path('create_car/', create_car),
     path('delete_car/<int:id>/', delete_car),
     path('edit_car/<int:id>/', edit_car),
-    path('instances_add/', instances_add, name="instances_add")
+    path('instances_add/', instances_add, name="instances_add"),
+    path('create_carinstance/', create_carinstance)
     # path('carinstance/create/', CarInstanceCreate.as_view(), name="car_instance_create"),
     # path('carinstances/update/<slug:slug>/', CarInstanceUpdate.as_view(), name="car_instance_update"),
     # path('carinstances/delete/<slug:slug>/', CarInstanceDelete.as_view(), name="car_instance_delete")

@@ -37,13 +37,13 @@
 <!--                        <a href="/delete_car/{{car.id}}">Удалить</a></td>-->
                 </tr>
             {% endfor %}
-        {% else %}}
+        {% else %}
             <p>В базе данных нет существующих заказов</p>
         {% endif %}
     </table>
 
     <h3>Добавить новый заказ</h3>
-    <form method="POST" action="/create_car/">
+    <form method="POST" action="/create_carinstance/">
         {% csrf_token %}
         <table>
             {{ form }}

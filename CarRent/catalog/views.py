@@ -96,6 +96,21 @@ def instances_add(request):
     return render(request, "catalog/instances_add.html",
                   {"form": instancesForm, "carinstance": carInstance})
 
+def create_carinstance(request):
+    if request.method == "POST":
+        carInstance = CarInstance()
+        carInstance.car = request.POST.get("car")
+        carInstance.status = request.POST.get("status")
+        carInstance.date_start = request.POST.get("date_start")
+        carInstance.date_back = request.POST.get("date_back")
+        carInstance.client = request.POST.get("client")
+        carInstance.save()
+        # Возвразаемся на предыдущую страницу
+        return HttpResponseRedirect("/instances_add/")
+
+
+
+
 # Отображение в виде запроса
 # class CarInstanceCreate(CreateView):
 #     model = CarInstance
