@@ -99,11 +99,11 @@ def instances_add(request):
 def create_carinstance(request):
     if request.method == "POST":
         carInstance = CarInstance()
-        carInstance.car = request.POST.get("car")
-        carInstance.status = request.POST.get("status")
+        carInstance.car = Car(id=request.POST.get("car"))
+        carInstance.status = Status(id=request.POST.get("status"))
         carInstance.date_start = request.POST.get("date_start")
         carInstance.date_back = request.POST.get("date_back")
-        carInstance.client = request.POST.get("client")
+        carInstance.client = Client(id=request.POST.get("client"))
         carInstance.save()
         # Возвразаемся на предыдущую страницу
         return HttpResponseRedirect("/instances_add/")
