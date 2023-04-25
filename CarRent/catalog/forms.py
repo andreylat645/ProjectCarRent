@@ -11,8 +11,8 @@ class CarsForm(forms.Form):
 class InstancesForm(forms.Form):
     car = forms.ModelChoiceField(label="Автомобиль", queryset=Car.objects.all())
     status = forms.ModelChoiceField(label="Статус", queryset=Status.objects.all())
-    date_start = forms.DateField(label="Дата нач.аренды", widget=forms.SelectDateWidget, initial=datetime.date.today)
-    date_back = forms.CharField(label="Дата завер.аренды", widget=forms.SelectDateWidget, initial=datetime.date.today)
+    date_start = forms.CharField(label="Дата нач.аренды", initial=datetime.date.today)
+    date_back = forms.CharField(label="Дата завер.аренды", initial=datetime.date.today)
     client = forms.ModelChoiceField(label="Клиент", queryset=Client.objects.all())
 
 # class CarInstanceModelForm(forms.Form):

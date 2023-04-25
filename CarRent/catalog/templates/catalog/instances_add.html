@@ -24,15 +24,15 @@
             </th>
         </thead>
 
-        {% if car %}
+        {% if carinstance %}
             {% for carinstance in carinstance.all %}
                 <tr>
                     <td>{{carinstance.id}}</td>
                     <td>{{carinstance.car}}</td>
                     <td>{{carinstance.status}}</td>
                     <td>{{carinstance.date_start}}</td>
-                     <td>{{carinstance.date_back}}</td>
-                     <td>{{carinstance.client}}</td>
+                    <td>{{carinstance.date_back}}</td>
+                    <td>{{carinstance.client}}</td>
 <!--                    <td><a href="/edit_car/{{car.id}}">Изменить</a>,-->
 <!--                        <a href="/delete_car/{{car.id}}">Удалить</a></td>-->
                 </tr>

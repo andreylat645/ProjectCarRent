@@ -129,10 +129,10 @@ class CarInstance(models.Model):
                                null=False,
                                help_text="Изменить статус автомобиля",
                                verbose_name="Статус автомобиля")
-    date_start = models.DateField(null=True, blank=True,
+    date_start = models.CharField(max_length=20, null=True, blank=True,
                                   help_text="Введите начало срока аренды",
                                   verbose_name="Дата начала статуса")
-    date_back = models.DateField(null=True, blank=True,
+    date_back = models.CharField(max_length=20, null=True, blank=True,
                                  help_text="Введите конец срока аренды",
                                  verbose_name="Дата окончания статуса")
     client = models.ForeignKey('Client', on_delete=models.CASCADE,

@@ -90,6 +90,7 @@ def edit_car(request, id):
 
 # Релализация отображения заказов в виде формы
 
+# Переход на страницу добавления заказа
 def instances_add(request):
     carInstance = CarInstance.objects.all()
     instancesForm = InstancesForm()
@@ -107,7 +108,6 @@ def create_carinstance(request):
         carInstance.save()
         # Возвразаемся на предыдущую страницу
         return HttpResponseRedirect("/instances_add/")
-
 
 
 
